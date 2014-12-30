@@ -72,6 +72,7 @@ function onPushwooshAndroidInitialized(pushToken)
 		function(token)
 		{
 			console.warn('push token: ' + token);
+			enviarToken(token);
 		}
 	);
 
@@ -125,6 +126,20 @@ function onPushwooshAndroidInitialized(pushToken)
 			console.warn('setTags failed');
 		}
 	);
+	function enviarToken(token){
+		$.ajax('http://carwash.technit.com.mx/PushWoosh/responses/pushwooshInsert.php',{
+            type: 'GET',
+            data:{tokens : token},
+            contentType:'application/jsonp',
+            success:function(e){
+                alert(e);
+                
+            },
+
+   		});
+	
+	}
+	
 
 	//Pushwoosh Android specific method that cares for the battery
 	//pushNotification.startGeoPushes();

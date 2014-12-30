@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/PushwooshAndroid.js"></script>
+<script type="text/javascript" src="js/PushwooshiOS.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</head>
+
+<body>
+
+        <div>
+        <table id = 'listaTokens'></table>
+        </div>
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+$(document).ready(function (){
+	$.ajax('http://carwash.technit.com.mx/PushWoosh/responses/imprToken.php',{
+		type:'GET',
+		data:{tablaT : 1},
+		dataType: 'jsonp',
+		success: function(e){
+			$("#listaTokens").html("");
+			$("#listaTokens").html("<thead><tr><th>Token</th></thead>");
+
+			for (var i = 0; i< e.length; i++) {
+				var msg = $("<tr></tr>");
+				msg.append("<td>" + e[i].tokenstring + "</td>");
+				
+				$("#listaTokens").append(msg);
+			};
+		},
+		error:function(e){
+			alert(e);
+		}
+
+    });
+});
+</script>
