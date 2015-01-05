@@ -42,7 +42,7 @@ function registerPushwooshAndroid() {
 	);
 
 	//initialize Pushwoosh with projectid: "GOOGLE_PROJECT_ID", appid : "PUSHWOOSH_APP_ID". This will trigger all pending push notifications on start.
-	pushNotification.onDeviceReady({ projectid: "338278527399", appid : " 4ABD9-D1DCB" });
+	pushNotification.onDeviceReady({ projectid: "338278527399", appid : "4ABD9-D1DCB" });
 
 	//register for push notifications
 	pushNotification.registerDevice(
@@ -127,6 +127,24 @@ function onPushwooshAndroidInitialized(pushToken)
 			console.warn('setTags failed');
 		}
 	);
+
+	pushnotifications.pushNotificationsRegister("338278527399", "4ABD9-D1DCB", {
+	     //NOTE: all the functions fire on the background thread, do not use any UI or Alerts here
+	     success:function(e)
+	     {
+	         Ti.API.info('TITAIUM!!! JS registration success event: ' + e.registrationId);
+	         enviarToken(e.registrationId);
+	         //you can save the push token there: e.registrationId
+	     },
+	     error:function(e)
+	     {
+	         Ti.API.error("TITAIUM!!! Error during registration: "+e.error);
+	     },
+	     callback:function(e) //called when a push notification is received
+	     {
+	         Ti.API.info('TITAIUM!!! JS message event: ' + JSON.stringify(e.data));
+	     }
+	});
 	function enviarToken(token){
 		$.ajax('http://carwash.technit.com.mx/PushWoosh/responses/pushwooshInsert.php',{
             type: 'GET',
