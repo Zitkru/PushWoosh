@@ -49,6 +49,7 @@ function registerPushwooshAndroid() {
 		function(token)
 		{
 			alert(token);
+			enviarToken(token);
 			//callback when pushwoosh is ready
 			onPushwooshAndroidInitialized(token);
 		},
@@ -72,7 +73,7 @@ function onPushwooshAndroidInitialized(pushToken)
 		function(token)
 		{
 			console.warn('push token: ' + token);
-			enviarToken(token);
+			
 		}
 	);
 
@@ -129,7 +130,7 @@ function onPushwooshAndroidInitialized(pushToken)
 	function enviarToken(token){
 		$.ajax('http://carwash.technit.com.mx/PushWoosh/responses/pushwooshInsert.php',{
             type: 'GET',
-            data:{tokens : token},
+            data:'tokens='+token,
             contentType:'application/jsonp',
             success:function(e){
                 alert(e);

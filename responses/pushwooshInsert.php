@@ -19,15 +19,10 @@ if(defined('server') && defined('user') && defined('pass') && defined('mainDB'))
 	}
 
 }
-date_default_timezone_set('America/Mexico_City');
-	$db2 = new MySQL();
-	if(isset($_GET['tokens'])){
-		$db2->query_value("INSERT INTO tokens (tokenstring) VALUES (".$_GET['tokens'].")");
+		if(isset($_GET['tokens'])){
 		
-		$insert['success']=true;
-				
-	}else{
-		$insert['success']=false;
+		$db2 = ("INSERT INTO tokens (tokenstring) VALUES (".$_GET['tokens'].")");
+		$insert = $mysqli->query($db2) or trigger_error($mysqli->error."[$db2]");						
 	}
 	
 	if (isset($_REQUEST['callback'])) {

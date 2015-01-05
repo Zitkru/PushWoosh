@@ -19,10 +19,8 @@ if(defined('server') && defined('user') && defined('pass') && defined('mainDB'))
 	}
 
 }
-date_default_timezone_set('America/Mexico_City');
-	$db2 = new MySQL();
 	if(isset($_GET['tablaT'])){
-		$db2->query_value("SELECT tokenstring FROM tokens");
+		$db2 = ("SELECT tokenstring FROM tokens");
 		$i = 0;
 		$tmp = array();
 	
@@ -35,10 +33,8 @@ date_default_timezone_set('America/Mexico_City');
 			
 	
 		}
-		$tmp['success']=true;
+		
 				
-	}else{
-		$tmp['success']=false;
 	}
 	
 	if (isset($_REQUEST['callback'])) {
